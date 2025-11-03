@@ -1,0 +1,47 @@
+----# Select the names of all the products in the store.
+  Select Name from Products;
+----#Select the names and the prices of all the products in the store.
+  Select Name, Price from Products;
+----#Select all the products with a price between 60 and 120.
+   Select * From Products where price between 60 and 120;
+         or
+   Select * from products where price >=60 and price <=120
+----#Compute the average price of all the products.
+   Select avg(Price) from products;
+     or 
+   Select sum(price) /count(price) from Products;
+----#Compute the average price of all products with manufacturer code equal to 2
+    Select avg(Price) from Products where code = 2;
+----#Compute the number of products with a price larger than or equal to 180.
+    Select count(*) from products where price<180;
+----#Select the name and price of all products with a price larger than or equal to 180, and sort first by price (in descending order), and then by name (in ascending order)
+    select Name, Price from products where price>=180 order by price desc , Name Asc;
+----#Select all the data from the products, including all the data for each product's manufacturer
+   SELECT a.*, b.name
+FROM products a
+JOIN Manufacturers b
+  ON (a.manufacturer = b.code);
+----#Select the average price of each manufacturer's products, showing only the manufacturer's code
+Select avg(price), Manufacturer
+from Products
+group by (Manufacturer)
+----#Select the name and price of the cheapest product
+select name, price from Products 
+order by price asc
+limit 1;
+----#Add a new product: Loudspeakers, $70, manufacturer 2
+INSERT into Products VALUES(11,'Loudspeakers',70,2)
+----# Update the name of product 8 to "Laser Printer"
+update Products
+set Name ='laser Printer'
+where code =8;
+----#Apply a 10% discount to all products.
+update Products  
+set Price = price *0.9
+----# Apply a 10% discount to all products with a price larger than or equal to 120
+update Products  
+set Price = price *0.9
+where price <=120;
+
+
+
